@@ -1,0 +1,197 @@
+#firts exercise
+#a
+
+touch nameFile.txt
+cd nameFile.txt
+echo "antonna" > nameFile.txt
+cat nameFile.txt
+
+#b
+mkdir new
+
+#c
+cp ~/nameFile.txt ~/new
+cat new/nameFile.txt
+
+#d
+gedit ~/AntonNahhas.txt
+
+#e
+cd ~/new
+cp ../AntonNahhas.txt newFile.txt
+ls
+cat newFile.txt
+
+#f
+cd ~/new
+ls
+
+#g
+#first way
+cd /home
+#second way
+cd ~/new
+cd ..
+cd ..
+
+#h
+rm -f -r new
+
+
+#second exercise
+#1)
+ls -S
+cat mime.types
+
+#2)
+ls -Sr
+cat subuid
+
+#3)
+mkdir -p ~/grandfather/parent/son
+cd grandfather
+cd father
+cd son
+
+#4)
+bc
+#2+2
+#4
+
+#5)
+bc -q
+#2+2
+#4
+
+#6)
+cal $(date + '%m %Y')
+cal $(date + '%Y')
+
+
+#third exercise
+#1)
+who -a
+cd ~
+who -a > who_is_logged.txt
+cat who_is_logged
+
+#2)
+echo "the answer is 42" > fact 
+
+#3)
+who -a >> fact
+
+#4)
+grep "Alice" alice.txt
+
+#5)
+grep -c "Why" alice.txt
+
+#6)
+grep "CHAPTER" alice.txt | sed 's/CHAPTER [IVX]*. //' > chapters.txt
+cat chapters.txt
+
+#7)
+grep "fear" alice.txt | sed 's/e/o'
+
+#8)
+grep "Alice" alice.txt | cat -n > numbered_alice.txt
+cat numbered_alice.txt
+
+#9)
+grep -v -e 'fear' -e 'rabbit' alice.txt
+
+#10)
+grep '*' alice.txt | uniq
+
+
+#fourth exercise
+#1)
+#create a file
+dd if=/dev/urandom of=testfile bs=1M count=100
+pv testfile | dd of=testfile2 bs=1M
+#100Mib 0:00:00 [ 655Mib/s]
+
+#2)
+pv < /dev/zero > /dev/null
+[18,3GiB/s]
+
+#3)
+pv < /dev/random > /dev/null
+[447MiB/s]
+
+#4)
+pv < /dev/urandom > /dev/null
+[444MiB/s]
+
+#5)
+dd if=/dev/zero of=bigFile bs=1 count=1000000000 status=progress
+
+#6)
+pv bigFile > /tmp/bigFileCopy
+
+
+
+#fifth exercise
+#1)
+cd ~
+mkdir subds
+cd subs
+touch file{A..F}.txt
+ls 
+
+#2)
+rm file{C..F}.txt
+ls 
+
+#3)
+mv fileA.txt fileA.old
+ls
+
+#4)
+rm * 
+ls
+
+#5)
+find /etc -type f -name '*.conf' -exec cp {} ~/subs \;
+ls
+
+#6)
+ls l*
+
+#7)
+ls | grep -E '^.{4}\..+$'
+
+#8)
+ls -l ~/subs
+echo "The last modified file is $(ls -t | head -l)"
+
+#9)
+cut -d: -f1 /etc/group | xargs -I{} mkdir -p ~/subs/{}
+ls 
+
+#10)
+echo ':-* ;-) :-{}'
+
+#sixth exercise
+#!/bin/bash
+
+num_files=${1:-50} #default val = 50
+
+#make dir name according the date the file was ran
+dir_name="zerp_$(date +%Y-%m-%d)_files"
+mkdir $dir_name
+
+for((i=1; i<=$num_files; i++)); do
+	num_zeros=$(printf "%0${i}d" 0)
+
+	filename="File-${i}_.date"
+	echo $num_zeros > $dir_name/$filename
+done
+
+#to run on bach use this command 
+./my_file 10
+#my_file is the bash scripting filename I created
+
+
+
